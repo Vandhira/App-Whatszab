@@ -1,116 +1,164 @@
--- Valentina Studio --
--- MySQL dump --
--- ---------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 17 Jul 2022 pada 11.01
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
--- ---------------------------------------------------------
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `db_whatszab`
+--
 
--- CREATE TABLE "tbl_groups" -----------------------------------
-CREATE TABLE `tbl_groups`( 
-	`id` Int( 0 ) AUTO_INCREMENT NOT NULL,
-	`id_group` Text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-	`nama_group` Text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-	`created_at` Timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = latin1
-COLLATE = latin1_swedish_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 11;
--- -------------------------------------------------------------
+-- --------------------------------------------------------
 
+--
+-- Struktur dari tabel `tbl_groups`
+--
 
--- CREATE TABLE "tbl_message" ----------------------------------
-CREATE TABLE `tbl_message`( 
-	`id` Int( 0 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`number` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-	`message` Text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-	`sender` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`status` LongText CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`desc` LongText CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	CONSTRAINT `unique_id` UNIQUE( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_general_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 800;
--- -------------------------------------------------------------
+CREATE TABLE `tbl_groups` (
+  `id` int(11) NOT NULL,
+  `id_group` text NOT NULL,
+  `nama_group` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbl_groups`
+--
 
--- CREATE TABLE "tbl_users" ------------------------------------
-CREATE TABLE `tbl_users`( 
-	`id` Int( 0 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`username` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`password` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`created_at` Timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` Timestamp NULL,
-	`role` Enum( 'user', 'admin' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	CONSTRAINT `unique_id` UNIQUE( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_general_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 17;
--- -------------------------------------------------------------
+INSERT INTO `tbl_groups` (`id`, `id_group`, `nama_group`, `created_at`, `updated_at`) VALUES
+(1, '6282165561175-1598343953@g.us', 'Cloud Games', '2021-06-03 16:00:00', '2021-06-03 16:00:00');
 
+-- --------------------------------------------------------
 
--- CREATE TABLE "tbl_wa" ---------------------------------------
-CREATE TABLE `tbl_wa`( 
-	`id` Int( 0 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`userid` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`file` Text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-	`idwa` VarChar( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-	CONSTRAINT `unique_id` UNIQUE( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_general_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 107;
--- -------------------------------------------------------------
+--
+-- Struktur dari tabel `tbl_message`
+--
 
+CREATE TABLE `tbl_message` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `number` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `sender` varchar(255) NOT NULL,
+  `status` longtext NOT NULL,
+  `desc` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dump data of "tbl_groups" -------------------------------
-BEGIN;
+-- --------------------------------------------------------
 
-INSERT INTO `tbl_groups`(`id`,`id_group`,`nama_group`,`created_at`,`updated_at`) VALUES 
-( '1', '6282165561175-1598343953@g.us', 'Cloud Games', '2021-06-04 00:00:00', '2021-06-04 00:00:00' );
+--
+-- Struktur dari tabel `tbl_users`
+--
+
+CREATE TABLE `tbl_users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `role` enum('user','admin') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`id`, `username`, `email`, `password`, `created_at`, `updated_at`, `role`) VALUES
+(17, 'wifikampoeng', 'wifikampoeng@gmail.com', '$2a$12$y05oLjqeXgP6hRI25dr1g.yf5T0ZBtnSaax4Dl4856jaeZSVRfkmS', '2022-07-16 20:20:04', NULL, 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_wa`
+--
+
+CREATE TABLE `tbl_wa` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `file` text NOT NULL,
+  `idwa` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `tbl_wa`
+--
+
+INSERT INTO `tbl_wa` (`id`, `userid`, `description`, `file`, `idwa`) VALUES
+(107, 'wifikampoeng@gmail.com', '', 'whatsapp-session-082187955553.json', '082187955553'),
+(108, 'wifikampoeng@gmail.com', 'admin wifikampoeng.my.id', 'whatsapp-session-6282187955553.json', '6282187955553');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `tbl_groups`
+--
+ALTER TABLE `tbl_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tbl_message`
+--
+ALTER TABLE `tbl_message`
+  ADD UNIQUE KEY `unique_id` (`id`);
+
+--
+-- Indeks untuk tabel `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  ADD UNIQUE KEY `unique_id` (`id`);
+
+--
+-- Indeks untuk tabel `tbl_wa`
+--
+ALTER TABLE `tbl_wa`
+  ADD UNIQUE KEY `unique_id` (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_groups`
+--
+ALTER TABLE `tbl_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_message`
+--
+ALTER TABLE `tbl_message`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=800;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_wa`
+--
+ALTER TABLE `tbl_wa`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 COMMIT;
--- ---------------------------------------------------------
 
-
--- Dump data of "tbl_message" ------------------------------
-BEGIN;
-
-INSERT INTO `tbl_message`(`id`,`number`,`message`,`sender`,`status`,`desc`) VALUES 
-( '2', '6282165561175@c.us', 'INI PESAN MEDIA', 'imamwasmawi', 'terkirim', 'message' ),
-( '106', 'imam@uma.ac.id', 'mmmm', 'whatsapp-session-mmmm.json', 'mmmm' );
-COMMIT;
--- ---------------------------------------------------------
-
--- Dump data of "tbl_message" ------------------------------
-BEGIN;
-
-INSERT INTO `tbl_users`(`id`,`username`,`email`,`password`,`created_at`,`updated_at`, `role`) VALUES 
-( '1', 'wongbodo', 'medegenerator@gmail.com', '$2a$12$8s2dhPHepoE6ehDCPW9oIOxhoneVcSNrbK6xx3tOnTpYCgdLRDsvC', '2021-06-04 00:00:00', '2021-06-04 00:00:00' ),
-COMMIT;
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "index" ----------------------------------------
-CREATE INDEX `index` USING BTREE ON `tbl_users`( `id` );
--- -------------------------------------------------------------
-
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
--- ---------------------------------------------------------
-
-
