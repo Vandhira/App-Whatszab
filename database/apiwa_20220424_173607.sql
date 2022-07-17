@@ -92,6 +92,14 @@ INSERT INTO `tbl_message`(`id`,`number`,`message`,`sender`,`status`,`desc`) VALU
 COMMIT;
 -- ---------------------------------------------------------
 
+-- Dump data of "tbl_message" ------------------------------
+BEGIN;
+
+INSERT INTO `tbl_users`(`id`,`username`,`email`,`password`,`created_at`,`updated_at`, `role`) VALUES 
+( '1', 'wongbodo', 'medegenerator@gmail.com', '$2a$12$8s2dhPHepoE6ehDCPW9oIOxhoneVcSNrbK6xx3tOnTpYCgdLRDsvC', '2021-06-04 00:00:00', '2021-06-04 00:00:00' ),
+COMMIT;
+-- ---------------------------------------------------------
+
 
 -- CREATE INDEX "index" ----------------------------------------
 CREATE INDEX `index` USING BTREE ON `tbl_users`( `id` );
